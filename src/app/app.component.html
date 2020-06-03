@@ -1,3 +1,29 @@
 <ion-app>
+
+
   <ion-router-outlet></ion-router-outlet>
+
+  <ion-tabs *ngIf="logeado">
+
+    <ion-tab-bar slot="bottom">
+   
+      <ion-tab-button tab="Empresas">
+        <ion-icon name="map"></ion-icon>
+        <ion-label>Empresas</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="Cuentas">
+        <ion-icon name="person-circle"></ion-icon>
+        <ion-label>Cuentas</ion-label>
+      </ion-tab-button>
+  
+      
+  
+      <ion-tab-button tab="Miperfil">
+        <ion-icon name="information-circle"></ion-icon>
+        <ion-label>Mi Perfil</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+
 </ion-app>
