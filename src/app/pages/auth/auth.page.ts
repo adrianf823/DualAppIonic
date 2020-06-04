@@ -19,14 +19,22 @@ export class AuthPage implements OnInit {
   }
 
   ngOnInit() {
-    
+    console.log(this.usuario)
+    if(this.usuario == null){
+      console.log(this.usuario)
+     
+      
+    }else{
 
+    this.usuario=JSON.parse(localStorage.getItem("currentUser"))
+    if(this.usuario == null){
 
-
-    
+    }else{
+    console.log(this.usuario)
+    console.log('ENTRALOKOOOOOSODASODAOSODAODASDSAODOAAAAAAAAAAAAAAAAAAAA')
     if(this.usuario.Rol=="profesor"){
       console.log("LOGEADO COMO PROFESOR")
-      //this.router.navigate(['/profesor/ciclo',0]);
+      this.router.navigate(['/empresas',0]);
       localStorage.setItem("logeado","1")
       }
       if(this.usuario.Rol=="alumno"){
@@ -45,7 +53,8 @@ if(localStorage.getItem("deslogueado")=="1"){
   localStorage.setItem("deslogueado","0")
   location.reload()
 }
-
+}
+}
 
   }
   emailFormControl = new FormControl('', [
@@ -74,22 +83,18 @@ if(localStorage.getItem("deslogueado")=="1"){
         if(data.user.Rol=="profesor"){
 
           console.log("LOGEA COMO PROFESOR")
-          
-        
-      //  this.router.navigate(['/empresas',0]);
-      localStorage.setItem("logeado","1")
+        this.router.navigate(['/empresas',0]);
+        localStorage.setItem("logeado","1")
         this.usuario=JSON.parse(localStorage.getItem("currentUser"))
-       
-        
         }
         if(data.user.Rol=="alumno"){
         //  this.router.navigate(['/home/alumno/',data.user.id])
-          localStorage.setItem("logeado","1")
+         // localStorage.setItem("logeado","1")
          this.usuario=JSON.parse(localStorage.getItem("currentUser"))
           }
           if(data.user.Rol=="tutorempresa"){
         //    this.router.navigate(['/home/empresas',0])
-            localStorage.setItem("logeado","1")
+          //  localStorage.setItem("logeado","1")
           this.usuario=JSON.parse(localStorage.getItem("currentUser"))
             }
       },(error)=>

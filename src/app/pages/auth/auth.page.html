@@ -10,7 +10,7 @@
 
  
 
-  <form [formGroup]="myForm" class="form-signin">
+  <form [formGroup]="myForm" (ngSubmit)="onLogin(myForm.value)" class="form-signin">
 
 
 
@@ -32,7 +32,7 @@
   
 
 
-<ion-button type="submit" (click)="onLogin(myForm.value)" expand="full">Log In</ion-button>
+<ion-button type="submit" expand="full">Log In</ion-button>
 
 
 </form>
