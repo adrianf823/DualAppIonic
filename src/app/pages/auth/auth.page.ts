@@ -74,18 +74,22 @@ if(localStorage.getItem("deslogueado")=="1"){
         if(data.user.Rol=="profesor"){
 
           console.log("LOGEA COMO PROFESOR")
-        //this.router.navigate(['/home/ciclo',0]);
-        localStorage.setItem("logeado","1")
+          
+        
+      //  this.router.navigate(['/empresas',0]);
+      localStorage.setItem("logeado","1")
         this.usuario=JSON.parse(localStorage.getItem("currentUser"))
+       
+        
         }
         if(data.user.Rol=="alumno"){
         //  this.router.navigate(['/home/alumno/',data.user.id])
-         // localStorage.setItem("logeado","1")
+          localStorage.setItem("logeado","1")
          this.usuario=JSON.parse(localStorage.getItem("currentUser"))
           }
           if(data.user.Rol=="tutorempresa"){
         //    this.router.navigate(['/home/empresas',0])
-          //  localStorage.setItem("logeado","1")
+            localStorage.setItem("logeado","1")
           this.usuario=JSON.parse(localStorage.getItem("currentUser"))
             }
       },(error)=>

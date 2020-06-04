@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Usuario } from './models/usuario';
 import { NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import {AuthService} from '../app/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private router:Router
+    private router:Router,
+    private authService:AuthService
   ) {
     router.events.pipe(
       filter(event => event instanceof NavigationEnd)  
@@ -33,6 +35,11 @@ export class AppComponent {
     this.initializeApp();
   }
 
+  logOut(){
+    this.authService.logoutUser().subscribe()
+    this.router.navigate(["/login"])
+    localStorage.setItem("deslogueado","1")
+  }
 
   initializeApp() {
     this.platform.ready().then(() => {

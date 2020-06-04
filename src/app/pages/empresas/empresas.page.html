@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Empresas</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content fullscreen>
+  <div style="margin-top: 8vh;" *ngIf="!detalles && !tareas">
+  <ion-card  style="width: 40vh;margin-left: 8vh;"*ngFor="let empresa of empresasArray">
+    <img [src]="empresa.fotoEmpresa"/>
+    <ion-card-header>
+      <ion-card-title>{{empresa.Nombre}}</ion-card-title>
+      <ion-card-subtitle>{{empresa.TutorEmpresa}}</ion-card-subtitle>
+      
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button color="danger" *ngIf="usuario.Rol=='profesor'" (click)="borrarEmpresa(empresa)">Eliminar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</div>
+</ion-content>

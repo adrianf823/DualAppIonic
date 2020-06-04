@@ -1,29 +1,29 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+import {AuthGuard} from '../app/services/auth.guard';
 const routes: Routes = [
+  
+  {
+    path: 'profesores/:lugar/:id',
+    loadChildren: () => import('./pages/profesores/profesores.module').then( m => m.ProfesoresPageModule),
+ 
+  },
+  {
+    path: 'empresas/:id',
+    loadChildren: () => import('./pages/empresas/empresas.module').then( m => m.EmpresasPageModule),
+    
+  },
+  
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/auth/auth.module').then( m => m.AuthPageModule),
+    
+  },
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./pages/auth/auth.module').then( m => m.AuthPageModule)
-  },
-  
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },  {
-    path: 'profesores',
-    loadChildren: () => import('./pages/profesores/profesores.module').then( m => m.ProfesoresPageModule)
-  },
+  }
 
 ];
 

@@ -48,6 +48,7 @@ export class AuthService {
   }
 
   setToken(token): void {
+    console.log("ENTRO AL TOKEN LOKOOO")
     localStorage.setItem("accessToken", token);
   }
 
