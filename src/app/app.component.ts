@@ -37,8 +37,10 @@ export class AppComponent {
 
   logOut(){
     this.authService.logoutUser().subscribe()
-    this.router.navigate(["/login"])
+    this.router.navigateByUrl("/login")
     localStorage.setItem("deslogueado","1")
+    localStorage.setItem("logeado","0")
+    location.reload()
   }
 
   initializeApp() {

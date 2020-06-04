@@ -1,6 +1,6 @@
 import { NgModule,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,7 +13,8 @@ import { EmpresasPage } from './empresas.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    EmpresasPageRoutingModule
+    EmpresasPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [EmpresasPage],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

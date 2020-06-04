@@ -5,14 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { ReactiveFormsModule } from '@angular/forms';
-
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AuthPage } from './pages/auth/auth.page';
 import { AppRoutingModule } from './app-routing.module';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+ 
 // Mat modules //
 import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule, MatTab} from '@angular/material/tabs';
@@ -41,6 +40,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
      IonicModule.forRoot(), 
      AppRoutingModule,
      HttpClientModule,
+     FormsModule,
      ReactiveFormsModule,
      MatCardModule,
      MatTabsModule,
@@ -56,7 +56,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
      MatSidenavModule,
      MatListModule,
      NgbModule,
-     Ng2SearchPipeModule
+  
     
     ],
   providers: [
