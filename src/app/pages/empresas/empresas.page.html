@@ -7,8 +7,8 @@
 
 <ion-content fullscreen>
   <div style="margin-top: 8vh;" *ngIf="!detalles && !tareas">
-  <ion-card  style="width: 40vh;margin-left: 8vh;"*ngFor="let empresa of empresasArray">
-    <img src="https://s1.logaster.com/static/v3/img/products/logo.png"/>
+  <ion-card  style="width: 40vh;margin-left: 8vh;background-color: white;"*ngFor="let empresa of empresasArray">
+    <img [src]="empresa.fotoEmpresa"/>
     <ion-card-header>
       <ion-card-title>{{empresa.Nombre}}</ion-card-title>
       <ion-card-subtitle>{{empresa.TutorEmpresa}}</ion-card-subtitle>
