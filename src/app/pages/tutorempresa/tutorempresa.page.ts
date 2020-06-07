@@ -6,13 +6,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { MenuController } from '@ionic/angular';
-
 @Component({
-  selector: 'app-profesores',
-  templateUrl: './profesores.page.html',
-  styleUrls: ['./profesores.page.scss'],
+  selector: 'app-tutorempresa',
+  templateUrl: './tutorempresa.page.html',
+  styleUrls: ['./tutorempresa.page.scss'],
 })
-export class ProfesoresPage implements OnInit {
+export class TutorempresaPage implements OnInit {
   recarga=localStorage.getItem("logeado")
   showFiller = false;
   constructor(public services:ProfesorService, public router:Router,public modalService:NgbModal,private route: ActivatedRoute,public menuCtrl: MenuController) { 
@@ -33,7 +32,8 @@ export class ProfesoresPage implements OnInit {
   lugar;
   eleccionCuentas=localStorage.getItem("eleccionCuentas")
   ngOnInit() {
-    this.menuCtrl.toggle('first')
+    this.menuCtrl.toggle('first');
+    console.log("TUTORES EMPRESA")
     console.log(this.arrayUsuarios)
     if(this.recarga=="1"){
       location.reload()
@@ -44,50 +44,51 @@ export class ProfesoresPage implements OnInit {
     this.lugar=params['lugar']
     })
     setTimeout(() => {
-this.getProfesores()
+this.getTutores()
     }, 200);
   }
-  getProfesores(){
-    this.arrayProfesores=[]
+
+  getTutores(){
+    this.arrayTutores=[]
     this.services.getUsuarios().subscribe(resp=>{
       this.arrayUsuarios=resp;
       this.arrayUsuarios.forEach(element => {
-        if(element.Rol=="profesor"){
-          this.arrayProfesores.push(element)
+        if(element.Rol=="tutorempresa"){
+          this.arrayTutores.push(element)
         }
       });
     })
       }
 
 
+
       eliminarUsuario(id){
 
-     //   Swal.fire({
-        //  title: 'Espere',
-        //  text: 'Eliminando cuenta...',
+      //  Swal.fire({
+       //   title: 'Espere',
+       //   text: 'Eliminando cuenta...',
        //   icon: 'info',
        //   allowOutsideClick: false
-       // });
-        //Swal.showLoading();
+      //  });
+       // Swal.showLoading();
     
         
         this.services.deleteUsuario(id).subscribe(resp=>{
-         
-          this.getProfesores()
-         
+        
+          this.getTutores()
     
        
           
           
         })
     
-       // Swal.close();
-     //   Swal.fire({
+      //  Swal.close();
+      //  Swal.fire({
        //   title: 'Eliminar Usuario',
       ///    text: 'Usuario Eliminado',
       //    icon: 'success',
       //    confirmButtonText: 'OK'
-     //   });
+      //  });
       }
-
+    
 }

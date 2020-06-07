@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Tutores Empresa</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content fullscreen>
+  <div style="margin-top: 8vh;" *ngIf="!detalles && !tareas">
+  <ion-card  style="width: 40vh;margin-left: 3vh;"*ngFor="let tutor of arrayTutores">
+    <img src="https://s1.logaster.com/static/v3/img/products/logo.png"/>
+    <ion-card-header>
+      <ion-card-title>{{tutor.Nombre}}</ion-card-title>
+      <ion-card-subtitle>{{tutor.Apellido}}</ion-card-subtitle>
+      
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button color="danger" (click)="eliminarUsuario(tutor)">Eliminar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</div>
+</ion-content>

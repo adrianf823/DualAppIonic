@@ -26,7 +26,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table' 
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
-
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
@@ -39,6 +39,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   imports: [BrowserModule,
      IonicModule.forRoot(), 
      AppRoutingModule,
+     NgxDatatableModule,
      HttpClientModule,
      FormsModule,
      ReactiveFormsModule,

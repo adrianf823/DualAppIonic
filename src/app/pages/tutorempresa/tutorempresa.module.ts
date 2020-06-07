@@ -4,18 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ProfesoresPageRoutingModule } from './profesores-routing.module';
+import { TutorempresaPageRoutingModule } from './tutorempresa-routing.module';
 
-import { ProfesoresPage } from './profesores.page';
+import { TutorempresaPage } from './tutorempresa.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfesoresPageRoutingModule
+    TutorempresaPageRoutingModule
   ],
-  declarations: [ProfesoresPage],
+  declarations: [TutorempresaPage],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
-export class ProfesoresPageModule {}
+export class TutorempresaPageModule {}

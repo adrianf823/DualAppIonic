@@ -4,6 +4,7 @@ import { EmpresasService } from 'src/app/services/empresas.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Usuario } from 'src/app/models/usuario';
+import { MenuController } from '@ionic/angular';
 @Component({
   selector: 'app-empresas',
   templateUrl: './empresas.page.html',
@@ -17,10 +18,10 @@ empresasArray2:Empresa[]=[]
 detalles:boolean=false
 tareas:boolean=false
 usuario:Usuario= JSON.parse(localStorage.getItem("currentUser"));
-  constructor(public empresaservice:EmpresasService, public router:Router,public route:ActivatedRoute,public modalService:NgbModal) { }
+  constructor(public empresaservice:EmpresasService, public router:Router,public route:ActivatedRoute,public modalService:NgbModal,public menuCtrl: MenuController) { }
 
     ngOnInit(): void {
-    
+    this.menuCtrl.toggle('first')
       console.log('wat?');
     this.empresaservice.getEmpresas().subscribe(resp=>{
       this.getEmpresas();

@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Datos alumno</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+
+  <div class="row">
+    <!-- Columna Izquierda -->
+    <div class="col-5 text-right" style="margin-top: 2%;text-align: center;">
+    
+
+        <img mat-mini-fab class="imgProfile" src="https://s1.logaster.com/static/v3/img/products/logo.png" style="width: 120px;height: 120px; border-radius: 60%;"/>
+        <ion-item>
+          <ion-label style="text-align: center;">
+           {{alumno.Nombre}} {{alumno.Apellido}} <!-- Nombre Alumno -->
+          </ion-label>
+        </ion-item>
+
+
+    </div>
+    </div>
+
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="text-left">
+           <label>ID </label><br>
+          <label>Nombre </label><br>
+          <label>Instructor </label><br>
+          <label>Colaborador </label><br>
+          <label>Ciclo</label><br>
+          <label>Empresa</label></div>
+      </ion-col>
+      <ion-col>
+        <div>
+                 <label>{{alumno.id}}</label><br>
+                <label>{{alumno.Nombre}} {{alumno.Apellido}}</label><br>
+                <label>{{alumno.Instructor}}</label><br>
+                <label>{{alumno.Colaborador}}</label><br>
+                <label>{{alumno.CicloFormativo}}</label><br>
+                <label>{{alumno.Empresa}}</label><br>
+        </div>
+      </ion-col>
+    </ion-row>
+    
+     
+
+
+
+
+
+    <div class="ion-padding">
+
+      <!-- Theme classes dark, material, bootstrap -->
+      <ngx-datatable 
+        class="material"
+        [limit]="8" 
+        [rows]="rows" 
+        [loadingIndicator]="loadingIndicator"
+        [rowHeight]="'auto'"
+        [columns]="columns"
+        [columnMode]="'force'" 
+        [sortType]="'multi'" 
+        [headerHeight]="50" 
+        [footerHeight]="50">
+  
+        <ngx-datatable-column name="Modulo" prop="modulo">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.Nombre}}
+          </ng-template>
+        </ngx-datatable-column>
+     
+
+      <ngx-datatable-column name="Descripcion" prop="descripcion">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.tarea}}
+        </ng-template>
+      </ngx-datatable-column>
+    
+
+    <ngx-datatable-column name="Horas" prop="horas">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.Horas}}
+      </ng-template>
+    </ngx-datatable-column>
+
+
+    
+  <ngx-datatable-column name="Actions" sortable="false">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      <ion-button size="small" color="warning">Ver</ion-button>
+    </ng-template>
+  </ngx-datatable-column>
+
+<!-- 
+  <ngx-datatable-column name="Horas Realizadas" prop="horasrealizadas">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.HorasRealizadas}}
+    </ng-template>
+  </ngx-datatable-column>
+
+
+<ngx-datatable-column name="Evaluación profesor" prop="2">
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.EvProfesor}}
+  </ng-template>
+</ngx-datatable-column>
+
+
+<ngx-datatable-column name="Evaluación tutor" prop="">
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.EvTutor}}
+  </ng-template>
+</ngx-datatable-column>
+-->
+
+
+</ngx-datatable>
+
+
+
+
+    </div>
+    
+  </ion-grid>
+</ion-content>

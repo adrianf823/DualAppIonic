@@ -1,24 +1,49 @@
 <ion-app>
 
+  <ion-buttons  *ngIf="logeado" slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-router-outlet id="main"></ion-router-outlet>
 
-  <ion-router-outlet></ion-router-outlet>
+
+
+   
+  
+
+    
+ 
+
+
+  <ion-menu  *ngIf="logeado" side="start" menuId="first" contentId="main">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Alumnos</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item *ngFor="let alumno of arrayAlumnos" (click)="verAlumno(alumno)">{{alumno.Nombre}} {{alumno.Apellido}}</ion-item>
+      
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+
+
+
 
   <ion-tabs *ngIf="logeado">
+    
+  
+    <ion-tab-bar slot="top">
 
-    <ion-tab-bar slot="bottom">
+     
+    
+        
    
-      <ion-tab-button tab="Empresas">
-        <ion-icon name="map"></ion-icon>
-        <ion-label>Empresas</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="Cuentas">
-        <ion-icon name="person-circle"></ion-icon>
-        <ion-label>Cuentas</ion-label>
-      </ion-tab-button>
-  
       
-  
+    
+    
       <ion-tab-button tab="Miperfil">
         <ion-icon name="information-circle"></ion-icon>
         <ion-label>Mi Perfil</ion-label>
@@ -28,6 +53,37 @@
         <ion-icon name="log-out"></ion-icon>
         <ion-label>Log out</ion-label>
       </ion-tab-button>
+    </ion-tab-bar>
+
+
+
+
+    <ion-tab-bar slot="bottom">
+
+      <ion-tab-button (click)="verEmpresas()">
+        <ion-icon name="map"></ion-icon>
+        <ion-label>Empresas</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button (click)="verAlumnos()">
+        <ion-icon name="person-circle"></ion-icon>
+        <ion-label>Alumnos</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button (click)="verProfesores()">
+        <ion-icon name="person-circle"></ion-icon>
+        <ion-label>Profesores</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button (click)="verTutoresEmpresa()">
+        <ion-icon name="person-circle"></ion-icon>
+        <ion-label>Tutores</ion-label>
+      </ion-tab-button>
+      <ion-tab-button (click)="verCiclos()" tab="Ciclos">
+        <ion-icon name="information-circle"></ion-icon>
+        <ion-label>Ciclos</ion-label>
+      </ion-tab-button>
+   
     </ion-tab-bar>
   </ion-tabs>
 
