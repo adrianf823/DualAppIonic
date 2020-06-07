@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { AuthPage } from './pages/auth/auth.page';
 import { AppRoutingModule } from './app-routing.module';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
  
 // Mat modules //
 import {MatCardModule} from '@angular/material/card';
@@ -27,7 +27,7 @@ import { MatTableModule } from '@angular/material/table'
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
+import Swal from 'sweetalert2'
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
@@ -63,7 +63,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    NgbActiveModal
   ],
   bootstrap: [AppComponent],
  

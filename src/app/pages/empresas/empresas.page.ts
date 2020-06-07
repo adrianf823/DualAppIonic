@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Usuario } from 'src/app/models/usuario';
 import { MenuController } from '@ionic/angular';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-empresas',
   templateUrl: './empresas.page.html',
@@ -21,7 +22,7 @@ usuario:Usuario= JSON.parse(localStorage.getItem("currentUser"));
   constructor(public empresaservice:EmpresasService, public router:Router,public route:ActivatedRoute,public modalService:NgbModal,public menuCtrl: MenuController) { }
 
     ngOnInit(): void {
-    this.menuCtrl.toggle('first')
+    
       console.log('wat?');
     this.empresaservice.getEmpresas().subscribe(resp=>{
       this.getEmpresas();
@@ -70,6 +71,17 @@ usuario:Usuario= JSON.parse(localStorage.getItem("currentUser"));
 
 borrarEmpresa(empresa){
   
+
+  Swal.fire({
+    title: 'Espere',
+    text: 'Eliminando empresa...',
+    icon: 'info',
+    allowOutsideClick: false
+  });
+  Swal.showLoading();
+
+
+
   this.empresaservice.deleteEmpresas(empresa.id).subscribe(resp=>{
     this.empresaservice.getEmpresas().subscribe(resp=>{
       this.empresasArray=resp
@@ -88,6 +100,16 @@ borrarEmpresa(empresa){
     })
    
   })
+
+  Swal.close();
+  Swal.fire({
+    title: 'Eliminar Usuario',
+    text: 'Usuario Eliminado',
+    icon: 'success',
+    confirmButtonText: 'OK'
+  });
+
+
 }
 
 }

@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalles Actividad Formativa</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-grid>
+
+  <ion-row>
+  <ion-col>
+    <div class="text-left">
+       <label>Descripcion: {{data.Nombre}} </label><br>
+      <label>Horas: {{data.Horas}} </label>
+</div>
+  </ion-col>
+</ion-row>
+
+
+
+  
+  <div class="ion-padding">
+
+    <!-- Theme classes dark, material, bootstrap -->
+    <ngx-datatable 
+      class="material"
+      [limit]="8" 
+      [rows]="rows" 
+      [loadingIndicator]="loadingIndicator"
+      [rowHeight]="'auto'"
+      [columns]="columns"
+      [columnMode]="'force'" 
+      [sortType]="'multi'" 
+      [headerHeight]="50" 
+      [footerHeight]="50">
+
+   
+
+    <ngx-datatable-column name="Nombre" prop="Nombre">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.Nombre}}
+      </ng-template>
+    </ngx-datatable-column>
+  
+
+  <ngx-datatable-column name="Horas" prop="Horas">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.Horas}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Autoevaluacion" prop="Autoevaluacion">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.Autoevaluacion}}
+    </ng-template>
+  </ngx-datatable-column>
+
+
+  
+<ngx-datatable-column name="Actions" sortable="false">
+  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+    <ion-button size="small" color="danger" (click)="borrarActividad(row)">Borrar</ion-button>
+  </ng-template>
+</ngx-datatable-column>
+
+</ngx-datatable>
+
+
+  </div>
+  
+</ion-grid>
+
+
+
+
+
+
+
+
+
+
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      
+<form [formGroup]="myForm2">
+  <div class="form-group">
+  <ion-label style="text-align: center;">Profesor</ion-label>
+  <ion-item>
+    <ion-select (change)="cambiarEvaluacion($event)" type="text"  class="form-control"
+    formControlName="EvProfesor" id="evprof" [compareWith]="compareWith">
+  
+      <ion-select-option *ngFor="let item of arrayEvaluaciones">{{item}}</ion-select-option>
+    </ion-select>
+    <ion-button size="small" color="success" *ngIf="usuario.Rol=='profesor'" (click)="aplicarEvaluacion(myForm2.value)">Aplicar</ion-button>
+  </ion-item>
+
+</div>
+
+  </form>
+</ion-col>
+
+<ion-col>
+  <form [formGroup]="myForm2">
+    <div class="form-group">
+      <ion-label style="text-align: center;">Tutor</ion-label>
+      <ion-item>
+        <ion-select (change)="cambiarEvaluacion($event)" [compareWith]="compareWith" type="text" class="form-control"
+        formControlName="EvTutor" id="evtut">
+          <ion-select-option *ngFor="let item of arrayEvaluaciones">{{item}}</ion-select-option>
+        </ion-select>
+        <ion-button size="small" color="success" *ngIf="usuario.Rol=='tutorempresa'" (click)="aplicarEvaluacion(myForm2.value)">Aplicar</ion-button>
+      </ion-item>
+  
+</div>
+
+</form>
+  </ion-col>
+</ion-row>
+</ion-grid>
+
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-button expand="full" fill="clear" color="light" (click)="closeModal()">
+      Cerrar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

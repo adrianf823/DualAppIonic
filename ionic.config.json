@@ -1,5 +1,7 @@
 {
   "name": "DualAppIonic",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

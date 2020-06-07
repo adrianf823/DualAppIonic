@@ -4,7 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { ProfesorService } from 'src/app/services/profesor.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
+import { DetallesModalPage } from 'src/app/modals/detalles-modal/detalles-modal.page';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-datos-alumno',
@@ -25,7 +28,7 @@ alumnos:Usuario[]=[];
 
 
 
-  constructor(private route: ActivatedRoute,public services:ProfesorService,public modalService:NgbModal,private http: HttpClient,public menuCtrl: MenuController) {this.getAlumnos();
+  constructor(private modalController:ModalController,private route: ActivatedRoute,public services:ProfesorService,public modalService:NgbModal,private http: HttpClient,public menuCtrl: MenuController) {this.getAlumnos();
     this.getArrayTareasyModulos();
     this.columns = [
       { name: 'Modulo' },
@@ -62,17 +65,27 @@ alumnos:Usuario[]=[];
    
   })
  
+ 
+
 }
+
+
+
+
+
+
+
+
 
   
   getArrayTareasyModulos(){
-  //  Swal.fire({
-    //  title: 'Espere',
-   //   text: 'Puede tardar unos segundos...',
-   //   icon: 'info',
-   //   allowOutsideClick: false
-  //  });
-  //  Swal.showLoading();
+   Swal.fire({
+      title: 'Espere',
+      text: 'Puede tardar unos segundos...',
+     icon: 'info',
+     allowOutsideClick: false
+   });
+  Swal.showLoading();
     this.route.params.subscribe(params => {
       console.log(params['id'])
       this.arrayTareasyModulos=[]
@@ -107,6 +120,7 @@ alumnos:Usuario[]=[];
     
       this.arrayTareasyModulos.push(modulo)
       this.rows = this.arrayTareasyModulos;
+      console.log('ROWS '+this.rows)
     }
     
   }
@@ -114,7 +128,7 @@ alumnos:Usuario[]=[];
 
         });
         console.log(this.arrayTareasyModulos)
-       // Swal.close()
+       Swal.close()
       }, 500);
 
     });
@@ -137,10 +151,47 @@ alumnos:Usuario[]=[];
     })
 
 
+} 
+ openModal(row){
+
+  this.Plantillaciclo.Modulos.forEach(element2 => {
+    element2.tareas.forEach(async element3 => {
+      if(row.tarea==element3.Nombre){
+        console.log('ELEMENT 2 '+element2)
+        console.log('ELEMENT 3 '+element3)
+
+
+        const modal = this.modalController.create({
+   
+          component: DetallesModalPage,
+          componentProps: {"data":{
+            Nombre:row.Nombre,
+            tarea: row.tarea,
+            Horas:row.Horas,
+            HorasRealizadas:row.HorasRealizadas,
+            EvProfesor:row.EvProfesor,
+            EvTutor:row.EvTutor
+          },
+          PlantillaCiclo:this.Plantillaciclo,
+          Tarea1:element3,
+          id:this.alumno.id,
+          modulo:row
+        }
+      });
+      
+       
+      (await modal).present();
+        
 }
 
+  });
+  
+});
 
 
+
+
+}
 
 
 

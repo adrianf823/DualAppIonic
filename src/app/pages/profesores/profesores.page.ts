@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { MenuController } from '@ionic/angular';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profesores',
@@ -33,7 +34,7 @@ export class ProfesoresPage implements OnInit {
   lugar;
   eleccionCuentas=localStorage.getItem("eleccionCuentas")
   ngOnInit() {
-    this.menuCtrl.toggle('first')
+    
     console.log(this.arrayUsuarios)
     if(this.recarga=="1"){
       location.reload()
@@ -62,13 +63,13 @@ this.getProfesores()
 
       eliminarUsuario(id){
 
-     //   Swal.fire({
-        //  title: 'Espere',
-        //  text: 'Eliminando cuenta...',
-       //   icon: 'info',
-       //   allowOutsideClick: false
-       // });
-        //Swal.showLoading();
+       Swal.fire({
+          title: 'Espere',
+          text: 'Eliminando cuenta...',
+          icon: 'info',
+          allowOutsideClick: false
+        });
+        Swal.showLoading();
     
         
         this.services.deleteUsuario(id).subscribe(resp=>{
@@ -81,13 +82,13 @@ this.getProfesores()
           
         })
     
-       // Swal.close();
-     //   Swal.fire({
-       //   title: 'Eliminar Usuario',
-      ///    text: 'Usuario Eliminado',
-      //    icon: 'success',
-      //    confirmButtonText: 'OK'
-     //   });
+        Swal.close();
+        Swal.fire({
+          title: 'Eliminar Usuario',
+          text: 'Usuario Eliminado',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
       }
 
 }

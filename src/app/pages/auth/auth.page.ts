@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormBuilder,FormControl,Validators} from '@angular/forms'
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { isUndefined } from 'util';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.page.html',
@@ -14,7 +16,7 @@ export class AuthPage implements OnInit {
   myForm:FormGroup;
 
 
-  constructor(private formBuilder: FormBuilder,public authService:AuthService,public router:Router) {
+  constructor(private formBuilder: FormBuilder,public authService:AuthService,public router:Router,public alertController: AlertController) {
     this.createForm();
   }
 
@@ -32,18 +34,26 @@ export class AuthPage implements OnInit {
     }else{
     console.log(this.usuario)
     console.log('ENTRALOKOOOOOSODASODAOSODAODASDSAODOAAAAAAAAAAAAAAAAAAAA')
+
+   
     if(this.usuario.Rol=="profesor"){
       console.log("LOGEADO COMO PROFESOR")
+   
       this.router.navigate(['/empresas',0]);
       localStorage.setItem("logeado","1")
       }
       if(this.usuario.Rol=="alumno"){
-       // alert("Login alumno")
-      //  localStorage.setItem("logeado","1")
+        console.log("LOGEADO COMO ALUMNO")
+        
+        this.router.navigate(['/datos-alumno',this.usuario.id]);
+        localStorage.setItem("logeado","1")
+        
         }
         if(this.usuario.Rol=="tutorempresa"){
-       //   this.router.navigate(['/profesor/alumno',0])
-       //   localStorage.setItem("logeado","1")
+          console.log("LOGEADO COMO TUTOR")
+          
+          this.router.navigate(['/empresas',0]);
+          localStorage.setItem("logeado","1")
           }
 
 
@@ -90,18 +100,27 @@ if(localStorage.getItem("deslogueado")=="1"){
         this.usuario=JSON.parse(localStorage.getItem("currentUser"))
         }
         if(data.user.Rol=="alumno"){
-        //  this.router.navigate(['/home/alumno/',data.user.id])
-         // localStorage.setItem("logeado","1")
+          this.router.navigate(['/datos-alumno',this.usuario.id]);
+          localStorage.setItem("logeado","1")
          this.usuario=JSON.parse(localStorage.getItem("currentUser"))
           }
           if(data.user.Rol=="tutorempresa"){
-        //    this.router.navigate(['/home/empresas',0])
-          //  localStorage.setItem("logeado","1")
+            this.router.navigate(['/empresas',0]);
+            localStorage.setItem("logeado","1")
           this.usuario=JSON.parse(localStorage.getItem("currentUser"))
             }
-      },(error)=>
+            location.reload()
+      },async (error)=>{
+        const alert = await this.alertController.create({
+          cssClass: 'my-custom-class',
+          header: 'ERROR LOGIN',
+          message: 'Email/Contraseña incorrectos.',
+          buttons: ['OK']
+        });
+        await alert.present();
+      }
      
-      console.log("ERROR EN EL LOGIN")
+   
       
       );
   }

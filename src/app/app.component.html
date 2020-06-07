@@ -14,7 +14,7 @@
  
 
 
-  <ion-menu  *ngIf="logeado" side="start" menuId="first" contentId="main">
+  <ion-menu  *ngIf="usuario.Rol=='profesor' || usuario.Rol=='tutorempresa' " side="start" menuId="first" contentId="main">
     <ion-header>
       <ion-toolbar color="primary">
         <ion-title>Alumnos</ion-title>
@@ -60,26 +60,35 @@
 
     <ion-tab-bar slot="bottom">
 
-      <ion-tab-button (click)="verEmpresas()">
+      <ion-tab-button *ngIf="usuario.Rol=='alumno'" (click)="verMicuadernillo()">
+        <ion-icon name="person-circle"></ion-icon>
+        <ion-label>Mi Cuadernilo</ion-label>
+      </ion-tab-button>
+      <ion-tab-button *ngIf="usuario.Rol=='tutorempresa'" (click)="verEmpresas()">
+        <ion-icon name="map"></ion-icon>
+        <ion-label>Mi Empresa</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button *ngIf="usuario.Rol=='profesor'" (click)="verEmpresas()">
         <ion-icon name="map"></ion-icon>
         <ion-label>Empresas</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button (click)="verAlumnos()">
+      <ion-tab-button *ngIf="usuario.Rol=='profesor'" (click)="verAlumnos()">
         <ion-icon name="person-circle"></ion-icon>
         <ion-label>Alumnos</ion-label>
       </ion-tab-button>
   
-      <ion-tab-button (click)="verProfesores()">
+      <ion-tab-button *ngIf="usuario.Rol=='profesor'" (click)="verProfesores()">
         <ion-icon name="person-circle"></ion-icon>
         <ion-label>Profesores</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button (click)="verTutoresEmpresa()">
+      <ion-tab-button *ngIf="usuario.Rol=='profesor'" (click)="verTutoresEmpresa()">
         <ion-icon name="person-circle"></ion-icon>
         <ion-label>Tutores</ion-label>
       </ion-tab-button>
-      <ion-tab-button (click)="verCiclos()" tab="Ciclos">
+      <ion-tab-button *ngIf="usuario.Rol=='profesor'" (click)="verCiclos()">
         <ion-icon name="information-circle"></ion-icon>
         <ion-label>Ciclos</ion-label>
       </ion-tab-button>

@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title style="text-align: center;">Empresas</ion-title>
+    <ion-title *ngIf="usuario.Rol=='profesor'"  style="text-align: center;">Empresas</ion-title>
+    <ion-title *ngIf="usuario.Rol=='tutorempresa'"  style="text-align: center;">Mi Empresa</ion-title>
   </ion-toolbar>
 
 </ion-header>
@@ -10,13 +11,8 @@
     <ion-row>
       <ion-col size="12" size-xs="12" size-sm="6" size-md="4" size-lg="3">
   <div style="margin-top: 8vh;" *ngIf="!detalles && !tareas">
-<<<<<<< HEAD
-  <ion-card  style="width: 40vh;margin-left: 3vh;"*ngFor="let empresa of empresasArray">
+  <ion-card  style="width: 42vh;margin-left: 3vh;"*ngFor="let empresa of empresasArray">
     <img src="https://s1.logaster.com/static/v3/img/products/logo.png"/>
-=======
-  <ion-card  style="width: 40vh;margin-left: 8vh;background-color: white;"*ngFor="let empresa of empresasArray">
-    <img [src]="empresa.fotoEmpresa"/>
->>>>>>> 9c7943cc3d67bc7d02521117d6ea10990380246d
     <ion-card-header>
       <ion-card-title>{{empresa.Nombre}}</ion-card-title>
       <ion-card-subtitle>{{empresa.TutorEmpresa}}</ion-card-subtitle>

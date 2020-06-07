@@ -59,6 +59,8 @@ export class AppComponent {
       this.getAlumnos()
     }, 200);
     console.log(this.usuario)
+
+    
   }
   logOut(){
     this.authService.logoutUser().subscribe()
@@ -118,7 +120,14 @@ this.services.getUsuarios().subscribe(resp=>{
     
  
   }
-
+  verMicuadernillo(){
+    localStorage.setItem("alumnoData","1")
+    this.router.navigate( ['datos-alumno',this.usuario.id] );
+    
+    setTimeout(() => {
+      location.reload()
+    }, 200);
+  }
 
   verProfesores(){
     console.log("VER PROFESORES")
@@ -141,6 +150,7 @@ this.services.getUsuarios().subscribe(resp=>{
     this.router.navigateByUrl("tutorempresa/0")
   
   }
+  
   verCiclos(){
     console.log("VER CICLOS")
     localStorage.setItem("alumnoData","0")

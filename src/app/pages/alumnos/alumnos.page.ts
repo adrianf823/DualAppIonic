@@ -5,7 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { MenuController } from '@ionic/angular';
+import { MenuController, AlertController } from '@ionic/angular';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-alumnos',
   templateUrl: './alumnos.page.html',
@@ -14,7 +15,7 @@ import { MenuController } from '@ionic/angular';
 export class AlumnosPage implements OnInit {
   recarga=localStorage.getItem("logeado")
   showFiller = false;
-  constructor(public services:ProfesorService, public router:Router,public modalService:NgbModal,private route: ActivatedRoute,public menuCtrl: MenuController) { 
+  constructor(public services:ProfesorService, public router:Router,public modalService:NgbModal,private route: ActivatedRoute,public menuCtrl: MenuController,public alertController: AlertController) { 
     if(this.recarga=="1"){
       location.reload()
       localStorage.setItem("logeado","0")
@@ -33,7 +34,8 @@ alumnoData=localStorage.getItem("alumnoData")
 lugar;
 eleccionCuentas=localStorage.getItem("eleccionCuentas")
   ngOnInit() {
-this.menuCtrl.toggle('first')
+
+
     if(this.recarga=="1"){
       location.reload()
       localStorage.setItem("logeado","0")
@@ -43,6 +45,7 @@ this.menuCtrl.toggle('first')
     this.lugar=params['lugar']
     })
     setTimeout(() => {
+     
       this.getAlumnos()
     }, 200);
 
@@ -70,13 +73,12 @@ this.services.getUsuarios().subscribe(resp=>{
 
   eliminarUsuario(id){
 
-   // Swal.fire({
-   //   title: 'Espere',
-   //   text: 'Eliminando cuenta...',
-   //   icon: 'info',
-   ////   allowOutsideClick: false
-  //  });
-  //  Swal.showLoading();
+    Swal.fire({
+      title: 'Eliminar Usuario',
+      text: 'Usuario Eliminado',
+       icon: 'success',
+      confirmButtonText: 'OK'
+    });
 
     
     this.services.deleteUsuario(id).subscribe(resp=>{
@@ -85,13 +87,8 @@ this.services.getUsuarios().subscribe(resp=>{
      
     })
 
-   // Swal.close();
-  //  Swal.fire({
-    //  title: 'Eliminar Usuario',
-   // //  text: 'Usuario Eliminado',
-   //   icon: 'success',
-    //  confirmButtonText: 'OK'
-  //  });
+  
+  
   }
   
 

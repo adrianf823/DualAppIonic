@@ -4,7 +4,9 @@ import { Usuario } from 'src/app/models/usuario';
 import { Ciclo } from 'src/app/models/ciclo';
 import { CicloService } from 'src/app/services/ciclo.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { MenuController, AlertController } from '@ionic/angular';
+import Swal from 'sweetalert2';
+import { Modulo } from 'src/app/models/modulo';
 
 
 @Component({
@@ -16,23 +18,38 @@ export class CiclosPage implements OnInit {
   term;term2;term3;
   eleccionCuentas;
 ciclosArray:Ciclo[]=[]
+modulosArray:Modulo[]=[]
 detalles:boolean=false
 tareas:boolean=false
-  constructor(public cicloservice:CicloService, public router:Router,public route:ActivatedRoute,public menuCtrl: MenuController) { }
+usuario:Usuario= JSON.parse(localStorage.getItem("currentUser"));
+
+
+
+  constructor(public cicloservice:CicloService, public router:Router,public route:ActivatedRoute,public menuCtrl: MenuController,public alertController: AlertController) { }
 
     ngOnInit(): void {
-     this.menuCtrl.toggle('first')
-    this.cicloservice.getCiclos().subscribe(resp=>{
-      this.ciclosArray=resp
-      this.route.params.subscribe(params => {
-        console.log(this.ciclosArray)
-        if(params['id']!='0'){
-          this.detalles=true
+     
+      this.cicloservice.getCiclos().subscribe(resp=>{
+        this.ciclosArray=resp
+        this.route.params.subscribe(params => {
+          console.log(this.ciclosArray)
+          if(params['id']!='0'){
+            this.detalles=true
+           
+          }
          
-        }
-
+          this.ciclosArray.forEach(element => {
+            if(element.id==params['id']){
+              console.log(element.Modulos)
+              element.Modulos.forEach(element => {
+                console.log(element)
+                this.modulosArray.push(element)
+              });
+            }
+          });
+        })
       })
-    })
+     
    
   }
 
@@ -49,14 +66,18 @@ tareas:boolean=false
   //  });
 //  }
 
-borrarCiclo(ciclo){
+  async borrarCiclo(ciclo){
 
- // Swal.fire({
-  //  title: 'Eliminar Ciclo',
-   // text: 'Ciclo Eliminado',
-  //  icon: 'success',
-  //  confirmButtonText: 'OK'
- // });
+  Swal.fire({
+    title: 'Eliminar Ciclo',
+    text: 'Ciclo Eliminado',
+    icon: 'success',
+    confirmButtonText: 'OK'
+  });
+
+
+
+
 
   this.cicloservice.deleteCiclos(ciclo.id).subscribe(resp=>{
     this.cicloservice.getCiclos().subscribe(resp=>{
