@@ -52,16 +52,17 @@ export class AppComponent {
   ngOnInit(): void {
 
     this.route.params.subscribe(params => {
-      console.log(params['id'])
+      console.log('PARAMS ID APPCOMPONENTS '+params['id'])
   
     })
     setTimeout(() => {
       this.getAlumnos()
     }, 200);
-    console.log(this.usuario)
+    console.log('AppComponents this usuario '+this.usuario)
 
     
   }
+
   logOut(){
     this.authService.logoutUser().subscribe()
     this.router.navigateByUrl("/login")
@@ -157,7 +158,10 @@ this.services.getUsuarios().subscribe(resp=>{
     this.router.navigateByUrl("ciclos/0")
   
   }
-
+  verMiperfil(){
+    localStorage.setItem("alumnoData","0")
+    this.router.navigateByUrl("miperfil/0")
+  }
   
   openFirst() {
     this.menu.enable(true, 'first');

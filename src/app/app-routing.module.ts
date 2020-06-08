@@ -3,6 +3,21 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {AuthGuard} from '../app/guards/auth.guard';
 const routes: Routes = [
   {
+    path: 'anadirtarea',
+    loadChildren: () => import('./modals/anadirtarea/anadirtarea.module').then( m => m.AnadirtareaPageModule),
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'detalles-modal',
+    loadChildren: () => import('./modals/detalles-modal/detalles-modal.module').then( m => m.DetallesModalPageModule),
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'miperfil/:id',
+    loadChildren: () => import('./pages/miperfil/miperfil.module').then( m => m.MiperfilPageModule),
+    canActivate:[AuthGuard]
+  },
+  {
     path: 'ciclos/:id',
     loadChildren: () => import('./pages/ciclos/ciclos.module').then( m => m.CiclosPageModule),
     canActivate:[AuthGuard]
@@ -12,7 +27,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/datos-alumno/datos-alumno.module').then( m => m.DatosAlumnoPageModule),
     canActivate:[AuthGuard]
   },
- 
   {
     path: 'tutorempresa/:id',
     loadChildren: () => import('./pages/tutorempresa/tutorempresa.module').then( m => m.TutorempresaPageModule),
@@ -41,10 +55,10 @@ const routes: Routes = [
   },
   { path: '**', redirectTo: 'login' },
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  {
-    path: 'detalles-modal',
-    loadChildren: () => import('./modals/detalles-modal/detalles-modal.module').then( m => m.DetallesModalPageModule)
-  },
+ 
+
+  
+
 
  
 

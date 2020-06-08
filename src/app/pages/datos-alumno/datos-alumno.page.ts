@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { MenuController, ModalController } from '@ionic/angular';
 import { DetallesModalPage } from 'src/app/modals/detalles-modal/detalles-modal.page';
 import Swal from 'sweetalert2';
+import { AnadirtareaPage } from 'src/app/modals/anadirtarea/anadirtarea.page';
 
 
 @Component({
@@ -194,5 +195,38 @@ alumnos:Usuario[]=[];
 }
 
 
+openTarea(row){
+
+  this.Plantillaciclo.Modulos.forEach(element2 => {
+    element2.tareas.forEach(async element3 => {
+      if(row.tarea==element3.Nombre){
+        console.log('ELEMENT 2 '+element2)
+        console.log('ELEMENT 3 '+element3)
+
+
+        const modal = this.modalController.create({
+   
+          component: AnadirtareaPage,
+          componentProps: {
+          PlantillaCiclo:this.Plantillaciclo,
+          Tarea1:element3,
+          id:this.alumno.id,
+          modulo:row
+        }
+      });
+      
+       
+      (await modal).present();
+        
+}
+
+  });
+  
+});
+
+
+
+
+}
 
 }

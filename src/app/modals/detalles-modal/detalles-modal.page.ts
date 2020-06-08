@@ -89,6 +89,39 @@ console.log(this.PlantillaCiclo)
   
   }
 
+
+  borrarActividad(actividad){
+    this.PlantillaCiclo.Modulos.forEach(element => {
+      if(this.modulo.Nombre==element.Nombre){
+        element.tareas.forEach(element2 => {
+          if(element2.Nombre==this.Tarea1.Nombre){
+  element2.actividades.forEach(element3 => {
+    element2.actividades = element2.actividades.filter(function(dato){
+      if(dato.Nombre==actividad.Nombre && dato.Fecha==actividad.Fecha && dato.Horas==actividad.Horas && dato.Adjunto==actividad.Adjunto){
+        element2.HorasRealizadas-=dato.Horas  
+        return false;
+      }else{
+          return true;
+      }
+  });
+  
+              var alumno:Usuario={
+                PlantillaCiclo:this.PlantillaCiclo
+              }
+              console.log(alumno)
+              this.services.patchUsuarios(this.id,alumno).subscribe(resp=>{
+                this.arrayActividades=element2.actividades
+              })
+              this.getActividades()
+  });
+          }
+        
+          });
+          
+        }
+    });
+   
+  }
   cambiarEvaluacion(e) {
     console.log(e.target.value)
   }

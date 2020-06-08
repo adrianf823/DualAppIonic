@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Mi Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      
+      <ion-icon name="person" item-start></ion-icon>
+      <ion-label stacked>Nombres:</ion-label>
+      <ion-input disabled style="width: 70%;" type="text" class="form-control mb-2" id="NombreLabel" value="{{usuario.Nombre}}"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="person" item-start></ion-icon>
+      <ion-label stacked>Apellidos:</ion-label>
+      <ion-input disabled style="width: 70%;" type="text" class="form-control" id="ApellidoLabel" value="{{usuario.Apellido}}"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="mail" item-start></ion-icon>
+      <ion-label stacked>Correo electronico:</ion-label>
+      <ion-input disabled style="width: 70%;" type="text" class="form-control" id="EmailLabel" value="{{usuario.email}}"></ion-input>
+    </ion-item>
+   
+      <ion-item>
+        <ion-icon name="phone-portrait" item-start></ion-icon>
+        <ion-label stacked>Telefono</ion-label>
+        <ion-input disabled style="width: 70%;" type="text" class="form-control" id="TelefonoLabel" value="{{usuario.Telefono}}"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="home" item-start></ion-icon>
+        <ion-label stacked>Dirección</ion-label>
+        <ion-input disabled type="text" class="form-control" id="inputDireccion" value="{{usuario.Direccion}}" style="width: 85%;"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="home" item-start></ion-icon>
+        <ion-label stacked>Ciudad</ion-label>
+        <ion-input disabled type="text" class="form-control" id="inputCiudad" value="{{usuario.Ciudad}}"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="home" item-start></ion-icon>
+        <ion-label stacked>Provincia</ion-label>
+        <ion-input  disabled type="text" class="form-control" id="inputProvincia" value="{{usuario.Provincia}}"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-icon name="home" item-start></ion-icon>
+        <ion-label stacked>Código Postal</ion-label>
+        <ion-input  disabled type="text" class="form-control" id="inputCodigopostal" value="{{usuario.Cp}}"></ion-input>
+      </ion-item>
+
+      
+  </ion-list>
+</ion-content>
