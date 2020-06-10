@@ -6,9 +6,13 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <div style="margin-top: 8vh;" *ngIf="!detalles && !tareas">
-  <ion-card  style="width:38vh;margin-left: 3vh;"*ngFor="let alumno of arrayAlumnos">
-    <img src="https://s1.logaster.com/static/v3/img/products/logo.png"/>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+<div>
+  <div style="margin-top: 3vh;" *ngIf="!detalles && !tareas">
+  <ion-card  style="width:32vh;margin-left: 3vh;" *ngFor="let alumno of arrayAlumnos">
+    <img style="width: 32vh;height: 32vh;" [src]="alumno.Foto"/>
     <ion-card-header>
       <ion-card-title>{{alumno.Nombre}}</ion-card-title>
       <ion-card-subtitle>{{alumno.Apellido}}</ion-card-subtitle>
@@ -17,6 +21,16 @@
     <ion-card-content>
       <ion-button color="danger" (click)="eliminarUsuario(alumno)">Eliminar</ion-button>
     </ion-card-content>
+    
+      <br>
+    
   </ion-card>
-</div>
+
+  </div></div>
+  
+  </ion-col>
+  </ion-row>
+  </ion-grid>
+  
+
 </ion-content>

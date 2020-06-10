@@ -138,11 +138,13 @@ this.services.getUsuarios().subscribe(resp=>{
   }
 
   verAlumno(alumno:Usuario){
+
     console.log("VER ALUMNO LOKO")
     console.log(alumno)
     localStorage.setItem("eleccionCuentas","ninguno")
     localStorage.setItem("alumnoData","1")
     this.router.navigate( ['datos-alumno',alumno.id] );
+   
   }
   
   verTutoresEmpresa(){

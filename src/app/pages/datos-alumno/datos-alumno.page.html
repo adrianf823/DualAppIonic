@@ -13,7 +13,7 @@
     <div class="col-5 text-right" style="margin-top: 2%;text-align: center;">
     
 
-        <img mat-mini-fab class="imgProfile" src="https://s1.logaster.com/static/v3/img/products/logo.png" style="width: 120px;height: 120px; border-radius: 60%;"/>
+        <img mat-mini-fab class="imgProfile" [src]="alumno.Foto" style="width: 120px;height: 120px; border-radius: 60%;"/>
         <ion-item>
           <ion-label style="text-align: center;">
            {{alumno.Nombre}} {{alumno.Apellido}} <!-- Nombre Alumno -->
@@ -95,7 +95,7 @@
   <ngx-datatable-column name="Actions" sortable="false">
     <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
       <ion-button size="small" color="warning" (click)="openModal(row)">Ver</ion-button>
-      <ion-button size="small" color="warning" (click)="openTarea(row)">Tarea</ion-button>
+      <ion-button size="small" *ngIf="usuario.Rol=='profesor'" color="warning" (click)="openTarea(row)">Tarea</ion-button>
     </ng-template>
   </ngx-datatable-column>
 

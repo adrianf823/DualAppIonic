@@ -44,9 +44,8 @@ export class ProfesoresPage implements OnInit {
       console.log(params['id'])
     this.lugar=params['lugar']
     })
-    setTimeout(() => {
-this.getProfesores()
-    }, 200);
+    this.getProfesores()
+
   }
   getProfesores(){
     this.arrayProfesores=[]
@@ -62,7 +61,7 @@ this.getProfesores()
 
 
       eliminarUsuario(id){
-
+console.log(id)
        Swal.fire({
           title: 'Espere',
           text: 'Eliminando cuenta...',

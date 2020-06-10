@@ -34,7 +34,7 @@ alumnoData=localStorage.getItem("alumnoData")
 lugar;
 eleccionCuentas=localStorage.getItem("eleccionCuentas")
   ngOnInit() {
-
+  
 
     if(this.recarga=="1"){
       location.reload()
@@ -47,7 +47,9 @@ eleccionCuentas=localStorage.getItem("eleccionCuentas")
     setTimeout(() => {
      
       this.getAlumnos()
-    }, 200);
+      
+    }, 500);
+
 
   }
 

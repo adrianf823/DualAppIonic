@@ -10,18 +10,19 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col size="12" size-xs="12" size-sm="6" size-md="4" size-lg="3">
-  <div style="margin-top: 8vh;" *ngIf="!detalles && !tareas">
-  <ion-card  style="width: 38vh;margin-left: 3vh;"*ngFor="let empresa of empresasArray">
-    <img src="https://s1.logaster.com/static/v3/img/products/logo.png"/>
+  <div style="margin-top: 3vh;" *ngIf="!detalles && !tareas">
+  <ion-card  style="width: 32vh;margin-left: 3vh;"*ngFor="let empresa of empresasArray; let i = index">
+    <img [src]="empresa.fotoEmpresa"/>
     <ion-card-header>
       <ion-card-title>{{empresa.Nombre}}</ion-card-title>
       <ion-card-subtitle>{{empresa.TutorEmpresa}}</ion-card-subtitle>
-      
     </ion-card-header>
     <ion-card-content>
       <ion-button color="danger" *ngIf="usuario.Rol=='profesor'" (click)="borrarEmpresa(empresa)">Eliminar</ion-button>
     </ion-card-content>
+   
   </ion-card>
+  <br> <br>
 </div>
 </ion-col>
 </ion-row>
