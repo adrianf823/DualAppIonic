@@ -68,7 +68,7 @@
   
 <ngx-datatable-column name="Actions" sortable="false">
   <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-    <ion-button size="small" color="danger" (click)="borrarActividad(row)">Borrar</ion-button>
+    <ion-button size="small" color="danger" *ngIf="usuario.Rol=='profesor'" (click)="borrarActividad(row)">Borrar</ion-button>
   </ng-template>
 </ngx-datatable-column>
 

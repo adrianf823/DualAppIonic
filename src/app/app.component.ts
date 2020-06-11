@@ -86,7 +86,7 @@ this.services.getUsuarios().subscribe(resp=>{
     if(this.usuario.Rol == "tutorempresa"){
 
     
-    if(element.Rol=="alumno" && element.Colaborador==this.usuario.Nombre){
+    if(element.Rol=="alumno" && element.Colaborador==this.usuario.Nombre + ' ' + this.usuario.Apellido){
       this.arrayAlumnos.push(element)
     }
   }else{
@@ -115,11 +115,12 @@ this.services.getUsuarios().subscribe(resp=>{
   }
 
   verAlumnos(){
+    setTimeout(() => {
     console.log("VER ALUMNOS")
     localStorage.setItem("alumnoData","0")
     this.router.navigateByUrl("alumnos/0")
     
- 
+  }, 300);
   }
   verMicuadernillo(){
     localStorage.setItem("alumnoData","1")
@@ -131,10 +132,11 @@ this.services.getUsuarios().subscribe(resp=>{
   }
 
   verProfesores(){
+    setTimeout(() => {
     console.log("VER PROFESORES")
     localStorage.setItem("alumnoData","0")
     this.router.navigateByUrl("profesores/0")
-  
+  }, 300);
   }
 
   verAlumno(alumno:Usuario){
@@ -148,21 +150,25 @@ this.services.getUsuarios().subscribe(resp=>{
   }
   
   verTutoresEmpresa(){
+    setTimeout(() => {
     console.log("VER TUTORESEMPRESA")
     localStorage.setItem("alumnoData","0")
     this.router.navigateByUrl("tutorempresa/0")
-  
+  }, 300);
   }
   
   verCiclos(){
+    setTimeout(() => {
     console.log("VER CICLOS")
     localStorage.setItem("alumnoData","0")
     this.router.navigateByUrl("ciclos/0")
-  
+  }, 300);
   }
   verMiperfil(){
+    setTimeout(() => {
     localStorage.setItem("alumnoData","0")
     this.router.navigateByUrl("miperfil/0")
+  }, 300);
   }
   
   openFirst() {

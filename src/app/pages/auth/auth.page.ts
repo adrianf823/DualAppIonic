@@ -37,23 +37,26 @@ export class AuthPage implements OnInit {
 
    
     if(this.usuario.Rol=="profesor"){
+      setTimeout(() => {
       console.log("LOGEADO COMO PROFESOR")
    
       this.router.navigate(['/empresas',0]);
       localStorage.setItem("logeado","1")
+    }, 500);
       }
       if(this.usuario.Rol=="alumno"){
         console.log("LOGEADO COMO ALUMNO")
-        
+        setTimeout(() => {
         this.router.navigate(['/datos-alumno',this.usuario.id]);
         localStorage.setItem("logeado","1")
-        
+      }, 500);
         }
         if(this.usuario.Rol=="tutorempresa"){
           console.log("LOGEADO COMO TUTOR")
-          
+          setTimeout(() => {
           this.router.navigate(['/empresas',0]);
           localStorage.setItem("logeado","1")
+        }, 500);
           }
 
 
@@ -93,21 +96,27 @@ if(localStorage.getItem("deslogueado")=="1"){
         this.authService.setToken(token);
         console.log(data.user.Rol)
         if(data.user.Rol=="profesor"){
-
+          setTimeout(() => {
           console.log("LOGEA COMO PROFESOR")
         this.router.navigate(['/empresas',0]);
         localStorage.setItem("logeado","1")
         this.usuario=JSON.parse(localStorage.getItem("currentUser"))
+      }, 500);
         }
         if(data.user.Rol=="alumno"){
-          this.router.navigate(['/datos-alumno',this.usuario.id]);
+          setTimeout(() => {
+          this.router.navigate(['/datos-alumno',data.user.id]);
           localStorage.setItem("logeado","1")
          this.usuario=JSON.parse(localStorage.getItem("currentUser"))
+        }, 500);
           }
+          
           if(data.user.Rol=="tutorempresa"){
+            setTimeout(() => {
             this.router.navigate(['/empresas',0]);
             localStorage.setItem("logeado","1")
           this.usuario=JSON.parse(localStorage.getItem("currentUser"))
+        }, 500);
             }
             location.reload()
       },async (error)=>{

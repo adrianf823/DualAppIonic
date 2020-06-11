@@ -42,9 +42,11 @@ export class DetallesModalPage implements OnInit {
     setTimeout(() => {
       if(this.usuario.Rol=="profesor"){
         (<HTMLInputElement> document.getElementById("evtut")).disabled = true;
+        (<HTMLInputElement> document.getElementById("Autoevaluacion")).disabled = true;
      }
       if(this.usuario.Rol=="tutorempresa"){
         (<HTMLInputElement> document.getElementById("evprof")).disabled = true;
+        (<HTMLInputElement> document.getElementById("Autoevaluacion")).disabled = true;
       }
       if(this.usuario.Rol=="alumno"){
         (<HTMLInputElement> document.getElementById("evprof")).disabled = true;

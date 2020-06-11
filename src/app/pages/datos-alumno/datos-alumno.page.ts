@@ -70,14 +70,14 @@ public rows2 =[]
         console.log('ROWS2'+JSON.stringify(this.rows2))
         }
         console.log(this.rows2)
-        setTimeout(() => {
+       
           this.alumno=resp
           var p:any=resp
           Object.defineProperty(p,"id",{value:this.alumno.id})
           console.log(p)
           localStorage.setItem("currentAlumno",JSON.stringify(p))
         this.alumnos.push(resp)
-      }, 500);
+    
      
     })
    
