@@ -21,5 +21,6 @@ export interface Usuario {
     Ciudad?;
     TipoEvaluaciones?;
     Empresa?;
+    Diario?;
 
 }

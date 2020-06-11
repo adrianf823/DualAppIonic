@@ -7,7 +7,7 @@
 
 <ion-content>
 
-  <form [formGroup]="myForm">
+  <form [formGroup]="myForm" (ngSubmit)="submitForm(myForm.value)">
 
 
   <ion-item>
@@ -48,6 +48,10 @@
     </ion-select>
     <ion-button size="small" color="success"  (click)="submitForm(myForm.value)">Añadir</ion-button>
   </ion-item>-->
+  <ion-button expand="full" fill="clear" type="submit" >
+    Añadir
+  
+  </ion-button>
 </form>
 
 </ion-content>

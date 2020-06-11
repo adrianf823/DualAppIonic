@@ -49,11 +49,20 @@
     </ng-template>
   </ngx-datatable-column>
 
+ 
+    
   <ngx-datatable-column name="Autoevaluacion" prop="Autoevaluacion">
     <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.Autoevaluacion}}
+     
+        <ion-select  id="Autoevaluacion" placeholder='{{row.Autoevaluacion}}' (ionChange)="cambioAutoevaluacion($event,row)" [compareWith]="compareWith" >
+          <ion-select-option *ngFor="let item of arrayEvaluaciones">{{item}}</ion-select-option>
+        </ion-select>
+     
     </ng-template>
   </ngx-datatable-column>
+
+
+
 
 
   

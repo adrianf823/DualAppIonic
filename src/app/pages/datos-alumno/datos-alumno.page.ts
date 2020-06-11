@@ -8,6 +8,7 @@ import { MenuController, ModalController } from '@ionic/angular';
 import { DetallesModalPage } from 'src/app/modals/detalles-modal/detalles-modal.page';
 import Swal from 'sweetalert2';
 import { AnadirtareaPage } from 'src/app/modals/anadirtarea/anadirtarea.page';
+import { CreardiarioPage } from 'src/app/modals/creardiario/creardiario.page';
 
 
 @Component({
@@ -26,8 +27,9 @@ export class DatosAlumnoPage implements OnInit {
   alumno:Usuario= JSON.parse(localStorage.getItem("currentAlumno"));
 arrayAlumnos:Usuario[]=[];
 alumnos:Usuario[]=[];
-
-
+arrayDiario;
+public columns2: any;
+public rows2 =[]
 
   constructor(private modalController:ModalController,private route: ActivatedRoute,public services:ProfesorService,public modalService:NgbModal,private http: HttpClient,public menuCtrl: MenuController) {this.getAlumnos();
     this.getArrayTareasyModulos();
@@ -40,6 +42,13 @@ alumnos:Usuario[]=[];
       { name: 'Evaluación tutor' },
       { name: 'Operaciones' }
     ];
+    this.columns2 = [
+      { name: 'Fecha'},
+      { name: 'Descripcion' },
+  
+    ];
+
+    
 
 }
   
@@ -53,6 +62,14 @@ alumnos:Usuario[]=[];
       console.log(params['id'])
      
       this.services.getUsuarioPorId(params['id']).subscribe(resp=>{
+        if(resp.Diario==undefined){
+          this.arrayDiario=[]
+        }else{
+        this.arrayDiario=resp.Diario
+        this.rows2=this.arrayDiario
+        console.log('ROWS2'+JSON.stringify(this.rows2))
+        }
+        console.log(this.rows2)
         setTimeout(() => {
           this.alumno=resp
           var p:any=resp
@@ -156,10 +173,11 @@ alumnos:Usuario[]=[];
  openModal(row){
 
   this.Plantillaciclo.Modulos.forEach(element2 => {
+   
     element2.tareas.forEach(async element3 => {
+   
       if(row.tarea==element3.Nombre){
-        console.log('ELEMENT 2 '+element2)
-        console.log('ELEMENT 3 '+element3)
+      
 
 
         const modal = this.modalController.create({
@@ -171,7 +189,8 @@ alumnos:Usuario[]=[];
             Horas:row.Horas,
             HorasRealizadas:row.HorasRealizadas,
             EvProfesor:row.EvProfesor,
-            EvTutor:row.EvTutor
+            EvTutor:row.EvTutor,
+           
           },
           PlantillaCiclo:this.Plantillaciclo,
           Tarea1:element3,
@@ -227,6 +246,47 @@ openTarea(row){
 
 
 
+}
+
+
+  async openDiario(){
+
+
+
+
+        const modal = this.modalController.create({
+   
+          component: CreardiarioPage,
+          componentProps: {
+            arrayDiario:this.arrayDiario,
+            id:this.alumno.id,
+            rows2:this.rows2
+          }
+        
+      });
+      
+       
+      (await modal).present();
+        
+}
+
+borrarDiario(diario){
+ 
+  console.log(diario)
+  this.arrayDiario = this.arrayDiario.filter(function(dato){
+    if(dato.Descripcion==diario.Descripcion && dato.Fecha==diario.Fecha){
+      return false;
+    }else{
+        return true;
+    }
+});
+console.log(this.arrayDiario)
+var alumno={
+Diario:this.arrayDiario
+}
+this.rows2 = this.arrayDiario
+console.log(alumno)
+this.services.patchUsuarios(this.alumno.id,alumno).subscribe()
 }
 
 }

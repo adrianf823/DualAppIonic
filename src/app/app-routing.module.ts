@@ -54,7 +54,11 @@ const routes: Routes = [
     
   },
   { path: '**', redirectTo: 'login' },
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: '', pathMatch: 'full', redirectTo: 'login' },  {
+    path: 'creardiario',
+    loadChildren: () => import('./modals/creardiario/creardiario.module').then( m => m.CreardiarioPageModule)
+  },
+
  
 
   

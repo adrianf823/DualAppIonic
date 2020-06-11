@@ -1,0 +1,42 @@
+<ion-header>
+  
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Nuevo Diario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="myForm" (ngSubmit)="submitForm(myForm.value)">
+
+
+  <ion-item>
+    <ion-icon name="calendar" item-start></ion-icon>
+    <ion-label stacked>Fecha</ion-label>
+    <ion-input type="date" 
+    class="form-control"
+    formControlName="Fecha" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="copy" item-start></ion-icon>
+    <ion-label stacked>Descripción</ion-label>
+    <ion-input type="text" 
+    class="form-control"
+    formControlName="Descripcion"></ion-input>
+  </ion-item>
+  <ion-button expand="full" fill="clear" type="submit" >
+    Añadir
+  
+  </ion-button>
+</form>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-button expand="full" fill="clear" color="light" (click)="closeModal()">
+      Cerrar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

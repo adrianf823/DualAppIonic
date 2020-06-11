@@ -21,11 +21,12 @@ export class DetallesModalPage implements OnInit {
   @Input() public PlantillaCiclo;
   @Input() public modulo;
   @Input() public Tarea1;
+  @Input() public Autoevaluacion;
   @Input() data: any;
   arrayEvaluaciones=[]
   myForm: FormGroup;  myForm2: FormGroup;
   constructor(private navParams: NavParams, private modalController: ModalController,private formBuilder: FormBuilder,public services:ProfesorService) {
-    console.log(JSON.stringify(navParams.get('data')));
+    console.log('JSON'+JSON.stringify(navParams.get('data')));
     this.columns = [
       { name: 'Fecha' },
       { name: 'Tarea' },
@@ -35,6 +36,7 @@ export class DetallesModalPage implements OnInit {
     ];
    }
   ngOnInit() {
+    
     this.createForm2()
     this.createForm();
     setTimeout(() => {
@@ -43,6 +45,10 @@ export class DetallesModalPage implements OnInit {
      }
       if(this.usuario.Rol=="tutorempresa"){
         (<HTMLInputElement> document.getElementById("evprof")).disabled = true;
+      }
+      if(this.usuario.Rol=="alumno"){
+        (<HTMLInputElement> document.getElementById("evprof")).disabled = true;
+        (<HTMLInputElement> document.getElementById("evtut")).disabled = true;
       }
     }, 400);
     
@@ -61,15 +67,28 @@ console.log(this.PlantillaCiclo)
   getActividades(){
     this.PlantillaCiclo.Modulos.forEach(element => {
     if(this.modulo.Nombre==element.Nombre){
+     
       element.tareas.forEach(element2 => {
         if(element2.Nombre==this.Tarea1.Nombre){
+         
+          element2.actividades.forEach(element3 => {
+            setTimeout(() => {
+            this.av.setValue(element3.Autoevaluacion, {
+              onlySelf: true
+            })
+          }, 400);
+          })
+
           setTimeout(() => {
             this.evt.setValue(element2.EvTutor, {
               onlySelf: true
             })
+            
             this.evp.setValue(element2.EvProfesor, {
               onlySelf: true
             })
+           
+            console.log('AUTOEVALUASIONLOKO '+element2.Autoevaluacion)
           }, 400);
           
           if(element2.Comentarios==undefined){
@@ -88,7 +107,37 @@ console.log(this.PlantillaCiclo)
   });
   
   }
-
+  cambioAutoevaluacion(evento,tarea){
+    console.log(tarea)
+    console.log(evento.target.value)
+    this.PlantillaCiclo.Modulos.forEach(element => {
+      if(this.modulo.Nombre==element.Nombre){
+        element.tareas.forEach(element2 => {
+          if(element2.Nombre==this.Tarea1.Nombre){
+  element2.actividades.forEach(element3 => {
+    if(element3.Nombre==tarea.Nombre && element3.Fecha==tarea.Fecha){
+      if(element3.Autoevaluacion=="No realizada"){
+      element2.HorasRealizadas+=element3.Horas
+      }
+      element3.Autoevaluacion=evento.target.value
+    }
+  
+              var alumno:Usuario={
+                PlantillaCiclo:this.PlantillaCiclo
+              }
+              console.log(alumno)
+              this.services.patchUsuarios(this.id,alumno).subscribe(resp=>{
+                this.arrayActividades=element2.actividades
+                
+              })
+  });
+          }
+        
+          });
+          
+        }
+    });
+  }
 
   borrarActividad(actividad){
     this.PlantillaCiclo.Modulos.forEach(element => {
@@ -132,7 +181,7 @@ console.log(this.PlantillaCiclo)
       Horas: ['', [Validators.required]],
       Fecha: ['', [Validators.required]],
       Adjunto: ['', [Validators.required]],
-      Autoevaluacion: ['A', [Validators.required]]
+      Autoevaluacion: ['No realizada', [Validators.required]]
     });
   }
  
@@ -155,6 +204,9 @@ console.log(this.PlantillaCiclo)
   }
   get evt() {
     return this.myForm2.get('EvTutor');
+  }
+  get av() {
+    return this.myForm.get('Autoevaluacion');
   }
   get horasm() {
     return this.myForm.get('Horas');
